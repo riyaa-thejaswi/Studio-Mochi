@@ -80,15 +80,15 @@
         .raffle-card {
             background: var(--surface-color);
             border-radius: var(--card-radius);
-            padding: 50px;
+            padding: 55px 70px 50px;
             text-align: center;
             box-shadow: 0 8px 24px -8px rgba(74, 62, 61, 0.05);
             border: 1px solid var(--border-ui);
         }
 
         .raffle-card h1 {
-            font-size: 2.3rem;
-            font-weight: 900;
+            font-size: 2.5rem;
+            font-weight: 700;
             color: #4a3e3d;
             margin: 0 0 10px 0;
             letter-spacing: -0.5px;
@@ -116,7 +116,7 @@
 
         .rules-box p { font-size: 1.05rem; line-height: 1.7; color: var(--text-main); margin: 0 0 20px 0; }
         .rules-box p:last-child { margin-bottom: 0; }
-        .highlight-gold { color: #b45309; font-weight: 700; }
+        .highlight-gold { color: #C16E7B; font-weight: 700; }
         .highlight-pink { color: var(--pink-text); font-weight: 700; }
 
         .tags-row {
@@ -168,7 +168,7 @@
             font-size: 0.8rem;
             color: var(--text-muted);
             font-style: italic;
-            text-align: left;
+            text-align: center;
             line-height: 1.4;
             border-top: 1px solid var(--border-ui);
             padding-top: 20px;
@@ -214,6 +214,11 @@
             .info-tag, .btn-back { text-align: center; width: 100%; box-sizing: border-box; padding: 14px 20px; }
             .action-row { width: 100%; }
         }
+        .navbar,
+.raffle-container {
+    position: relative;
+    z-index: 1;
+}
     </style>
 </head>
 <body>
@@ -234,12 +239,6 @@
                 <p>Every <span class="highlight-gold">$5 spent</span> on preorders gets you <span class="highlight-gold">1 ticket</span> automatically entered into the draw. The winner will be selected randomly and posted here after preorders close.</p>
                 <p>PRIZE: The winner receives their order FREE<span class="highlight-pink">*</span></p>
                 <p>Everyone else gets a silver ticket for exclusive access to our secret menu on Market Day!</p>
-            </div>
-
-            <div class="tags-row">
-                <span class="info-tag">Transparent Draw</span>
-                <span class="info-tag">Secure Selection</span>
-                <span class="info-tag">Instant Prize</span>
             </div>
 
             <div class="action-row">
