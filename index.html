@@ -568,7 +568,7 @@ function resize() { canvas.width = window.innerWidth; canvas.height = window.inn
 resize();
 window.addEventListener("resize", resize);
  
-const PETAL_COUNT = window.innerWidth < 768 ? 15 : 40;
+const PETAL_COUNT = window.innerWidth < 768 ? 8 : 18;
 const petals = [];
 for (let i = 0; i < PETAL_COUNT; i++) {
     petals.push({
@@ -578,10 +578,15 @@ for (let i = 0; i < PETAL_COUNT; i++) {
     });
 }
 let fade = 1;
-setInterval(() => { fade = Math.max(0, fade - 0.0015); }, 16);
+let targetFade = 1;
+
+window.addEventListener("scroll", () => {
+    targetFade = Math.max(0, 1 - window.scrollY / 75);
+});
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    fade += (targetFade - fade) * 0.08;
     for (let p of petals) {
         ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(Math.sin(p.sway + p.y * 0.01));
         ctx.beginPath(); ctx.fillStyle = `rgba(255, 182, 193, ${0.35 * fade})`;
