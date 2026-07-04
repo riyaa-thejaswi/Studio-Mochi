@@ -93,21 +93,18 @@
                 5px 5px 0px rgba(74, 62, 61, 0.06);
         }
 
+        /* Updated to match the index.html flexible wrapping layout */
         .page-navigation {
             max-width: 760px;
             margin: 0 auto 40px auto;
-            display: grid;
-            grid-template-columns: repeat(3, auto);
+            display: flex;
             justify-content: center;
             gap: 15px;
             padding: 0 20px;
+            flex-wrap: wrap;
         }
 
-        .btn-raffle-aligned {
-            grid-column: 2;
-        }
-
-        .nav-link, .btn-preorder {
+        .nav-link {
             background: var(--surface-color);
             border: 1px solid var(--border-ui);
             color: var(--text-muted);
@@ -122,13 +119,13 @@
             display: inline-block;
         }
 
-        .nav-link:hover, .btn-preorder:hover {
+        .nav-link:hover {
             transform: translateY(-2px);
             color: var(--pink-text);
             border-color: var(--pink-accent);
         }
 
-        .nav-link.active-link, .btn-preorder.active-link {
+        .nav-link.active-link {
             background: var(--pink-accent);
             color: var(--pink-text) !important;
             border-color: var(--pink-accent);
@@ -192,6 +189,7 @@
             transform: translateY(-2px);
         }
 
+        /* Dark Mode */
         body.dark {
             --bg-color: #1a1622;
             --surface-color: #241d30;
@@ -204,8 +202,8 @@
 
         body.dark .form-card { background: var(--surface-color); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35); }
         body.dark .nav-meta { color: #d7cfe6; }
-        body.dark .nav-link, body.dark .btn-preorder { color: #e9e3f5; border-color: rgba(255, 255, 255, 0.12); background: rgba(255, 255, 255, 0.04); }
-        body.dark .nav-link.active-link, body.dark .btn-preorder.active-link { background: var(--pink-accent); color: #1a1622 !important; border-color: var(--pink-accent); }
+        body.dark .nav-link { color: #e9e3f5; border-color: rgba(255, 255, 255, 0.12); background: rgba(255, 255, 255, 0.04); }
+        body.dark .nav-link.active-link { background: var(--pink-accent); color: #1a1622 !important; border-color: var(--pink-accent); }
         body.dark .btn-submit-form { background: #e7a6c8; color: #1a1622 !important; box-shadow: 0 6px 20px rgba(231, 166, 200, 0.2); }
 
         #petalsCanvas {
@@ -224,8 +222,7 @@
             .hero-banner { margin: 40px auto 20px auto; }
             .hero-banner h1 { font-size: 2.3rem; }
             .page-navigation { flex-direction: column; gap: 10px; width: 100%; box-sizing: border-box; display: flex; }
-            .nav-link, .btn-preorder { width: 100%; box-sizing: border-box; padding: 14px 20px; }
-            .btn-raffle-aligned { grid-column: auto; }
+            .nav-link { width: 100%; box-sizing: border-box; padding: 14px 20px; }
             .form-card { padding: 30px 20px; }
             .btn-submit-form { width: 100%; box-sizing: border-box; }
         }
@@ -244,9 +241,8 @@
         
         <div class="page-navigation">
             <a href="index.html" class="nav-link">Menu Items</a>
-            <a href="preorder.html" class="btn-preorder">Preorder Menu</a>
             <a href="preorderForm.html" class="nav-link">Preorder Form</a>
-            <a href="preorderRaffle.html" class="nav-link btn-raffle-aligned">Preorder RAFFLE</a>
+            <a href="preorderRaffle.html" class="nav-link">Preorder RAFFLE</a>
         </div>
     </div>
 
@@ -261,7 +257,7 @@
 function highlightActivePageLinks() {
     const currentPath = window.location.pathname.split("/").pop();
     const activePage = currentPath === "" ? "preorderForm.html" : currentPath;
-    const allLinks = document.querySelectorAll(".nav-link, .btn-preorder");
+    const allLinks = document.querySelectorAll(".nav-link");
     
     allLinks.forEach(link => {
         const linkPath = link.getAttribute("href").split("/").pop();
