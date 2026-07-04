@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://w3.org viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>?v=2">
+    <title>Studio Mochi | Secure Preorders</title>
+    <style>
+        :root {
+            --bg-color: #fbf7f4;          /* Soft Cream Milk-Tea */
+            --surface-color: #ffffff;     /* Clean White */
+            --text-main: #4a3e3d;         /* Rich Cocoa Brown */
+            --text-muted: #8a7a78;        /* Matte Taupe */
+            --pink-accent: #ffccd5;       /* Sakura Pink */
+            --pink-text: #d6687a;
+            --border-ui: #f1eae6;
+            --card-radius: 20px;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+            position: relative;
+            transition: background 0.4s ease, color 0.4s ease;
+        }
+
+        .navbar {
+            background: var(--surface-color);
+            border-bottom: 1px solid var(--border-ui);
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0px -1px 6px rgba(0,0,0,0.12);
+            transition: background 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .nav-brand {
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--pink-text);
+            text-decoration: none;
+        }
+
+        .nav-brand:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
+
+        .nav-meta {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            background: var(--bg-color);
+            padding: 6px 14px;
+            border-radius: 30px;
+            text-align: right;
+            word-break: break-word;
+        }
+
+        .hero-banner {
+            max-width: 800px;
+            margin: 60px auto 30px auto;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero-banner h1 {
+            font-size: 3.2rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            margin: 0 0 30px 0;
+            color: var(--text-main);
+            text-shadow: 
+                2px 2px 0px var(--pink-accent), 
+                3px 3px 0px var(--pink-accent), 
+                4px 4px 0px var(--pink-accent), 
+                5px 5px 0px rgba(74, 62, 61, 0.06);
+        }
+
+        .page-navigation {
+            max-width: 760px;
+            margin: 0 auto 40px auto;
+            display: grid;
+            grid-template-columns: repeat(3, auto);
+            justify-content: center;
+            gap: 15px;
+            padding: 0 20px;
+        }
+
+        .btn-raffle-aligned {
+            grid-column: 2;
+        }
+
+        .nav-link, .btn-preorder {
+            background: var(--surface-color);
+            border: 1px solid var(--border-ui);
+            color: var(--text-muted);
+            padding: 14px 34px;
+            border-radius: 35px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 14px rgba(74, 62, 61, 0.04);
+            text-align: center;
+            display: inline-block;
+        }
+
+        .nav-link:hover, .btn-preorder:hover {
+            transform: translateY(-2px);
+            color: var(--pink-text);
+            border-color: var(--pink-accent);
+        }
+
+        .nav-link.active-link, .btn-preorder.active-link {
+            background: var(--pink-accent);
+            color: var(--pink-text) !important;
+            border-color: var(--pink-accent);
+            box-shadow: 0 6px 16px rgba(214, 104, 122, 0.15);
+        }
+
+        .form-card-container {
+            max-width: 550px;
+            margin: 0 auto 80px auto;
+            padding: 0 20px;
+        }
+
+        .form-card {
+            background: var(--surface-color);
+            border-radius: var(--card-radius);
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 8px 24px -8px rgba(74, 62, 61, 0.05);
+            border: 1px solid var(--border-ui);
+            transition: background 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .form-card h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin: 0 0 25px 0;
+            color: var(--text-main);
+        }
+
+        .btn-submit-form {
+            display: inline-block;
+            background: #d6687a;
+            color: #ffffff !important;
+            padding: 14px 36px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            box-shadow: 0 6px 20px rgba(214, 104, 122, 0.3);
+        }
+
+        .btn-submit-form:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(214, 104, 122, 0.45);
+            opacity: 0.95;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border-ui);
+            border-radius: 999px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+        }
+
+        .theme-toggle:hover {
+            box-shadow: 0px 4px 6px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+        }
+
+        body.dark {
+            --bg-color: #1a1622;
+            --surface-color: #241d30;
+            --text-main: #ffffff;
+            --text-muted: #c9c1d6;
+            --pink-accent: #e7a6c8;
+            --pink-text: #ffdfec;
+            --border-ui: rgba(255,255,255,0.12);
+        }
+
+        body.dark .form-card { background: var(--surface-color); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35); }
+        body.dark .nav-meta { color: #d7cfe6; }
+        body.dark .nav-link, body.dark .btn-preorder { color: #e9e3f5; border-color: rgba(255, 255, 255, 0.12); background: rgba(255, 255, 255, 0.04); }
+        body.dark .nav-link.active-link, body.dark .btn-preorder.active-link { background: var(--pink-accent); color: #1a1622 !important; border-color: var(--pink-accent); }
+        body.dark .btn-submit-form { background: #e7a6c8; color: #1a1622 !important; box-shadow: 0 6px 20px rgba(231, 166, 200, 0.2); }
+
+        #petalsCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @media (max-width: 768px) {
+            .navbar { padding: 15px 20px; flex-direction: column; gap: 10px; text-align: center; }
+            .nav-meta { text-align: center; }
+            .hero-banner { margin: 40px auto 20px auto; }
+            .hero-banner h1 { font-size: 2.3rem; }
+            .page-navigation { flex-direction: column; gap: 10px; width: 100%; box-sizing: border-box; display: flex; }
+            .nav-link, .btn-preorder { width: 100%; box-sizing: border-box; padding: 14px 20px; }
+            .btn-raffle-aligned { grid-column: auto; }
+            .form-card { padding: 30px 20px; }
+            .btn-submit-form { width: 100%; box-sizing: border-box; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="petalsCanvas"></canvas>
+    <nav class="navbar">
+        <div class="nav-brand">Studio Mochi</div>
+        <button id="themeToggle" class="theme-toggle">🌙</button>
+    </nav>
+
+    <div class="hero-banner">
+        <h1>Secure Preorders</h1>
+        
+        <div class="page-navigation">
+            <a href="index.html" class="nav-link">Menu Items</a>
+            <a href="preorder.html" class="btn-preorder">Preorder Menu</a>
+            <a href="preorderForm.html" class="nav-link">Preorder Form</a>
+            <a href="preorderRaffle.html" class="nav-link btn-raffle-aligned">Preorder RAFFLE</a>
+        </div>
+    </div>
+
+    <div class="form-card-container">
+        <div class="form-card">
+            <h2>Ready to order?</h2>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSebJTnfReUuj30bdaAmdK6bAHWAwT8Byzi7E7pc5GTbue1-RQ/viewform" target="_blank" class="btn-submit-form">Open Google Forms ➔</a>
+        </div>
+    </div>
+
+<script>
+function highlightActivePageLinks() {
+    const currentPath = window.location.pathname.split("/").pop();
+    const activePage = currentPath === "" ? "preorderForm.html" : currentPath;
+    const allLinks = document.querySelectorAll(".nav-link, .btn-preorder");
+    
+    allLinks.forEach(link => {
+        const linkPath = link.getAttribute("href").split("/").pop();
+        if (linkPath === activePage) { link.classList.add("active-link"); } 
+        else { link.classList.remove("active-link"); }
+    });
+}
+highlightActivePageLinks();
+
+const toggle = document.getElementById("themeToggle");
+toggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    toggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+});
+
+const canvas = document.getElementById("petalsCanvas");
+const ctx = canvas.getContext("2d");
+function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resize();
+window.addEventListener("resize", resize);
+ 
+const PETAL_COUNT = window.innerWidth < 768 ? 15 : 40;
+const petals = [];
+for (let i = 0; i < PETAL_COUNT; i++) {
+    petals.push({
+        x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight * 0.8,
+        r: Math.random() * 7 + 8, speed: Math.random() * 0.6 + 0.3,
+        sway: Math.random() * 2, baseX: Math.random() * window.innerWidth
+    });
+}
+let fade = 1;
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let p of petals) {
+        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(Math.sin(p.sway + p.y * 0.01));
+        ctx.beginPath(); ctx.fillStyle = `rgba(255, 182, 193, ${0.35 * fade})`;
+        ctx.moveTo(0, 0); ctx.quadraticCurveTo(p.r, p.r, 0, p.r * 2); ctx.quadraticCurveTo(-p.r, p.r, 0, 0);
+        ctx.fill(); ctx.restore();
+        p.y += p.speed; p.x = p.baseX + Math.sin(p.sway + p.y * 0.015) * 18;
+        if (p.y > canvas.height) { p.y = -10; p.baseX = Math.random() * window.innerWidth; }
+    }
+    requestAnimationFrame(draw);
+}
+draw();
+</script>
+</body>
+</html>

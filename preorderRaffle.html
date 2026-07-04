@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://w3.org viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>?v=2">
+    <title>Studio Mochi | Preorder Raffle</title>
+    <style>
+        :root {
+            --bg-color: #fbf7f4;          /* Soft Cream Milk-Tea */
+            --surface-color: #ffffff;     /* Clean White */
+            --text-main: #4a3e3d;         /* Rich Cocoa Brown */
+            --text-muted: #8a7a78;        /* Matte Taupe */
+            --pink-accent: #ffccd5;       /* Sakura Pink */
+            --pink-text: #d6687a;
+            --border-ui: #f1eae6;
+            --card-radius: 20px;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+            position: relative;
+            transition: background 0.4s ease, color 0.4s ease;
+        }
+
+        .navbar {
+            background: var(--surface-color);
+            border-bottom: 1px solid var(--border-ui);
+            padding: 18px 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0px -1px 6px rgba(0,0,0,0.12);
+        }
+
+        .nav-brand {
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--pink-text);
+            text-decoration: none;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border-ui);
+            border-radius: 999px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            position: absolute;
+            right: 40px;
+        }
+
+        .theme-toggle:hover {
+            box-shadow: 0px 4px 6px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+        }
+
+        .raffle-container {
+            max-width: 900px;
+            margin: 50px auto 80px auto;
+            padding: 0 20px;
+        }
+
+        .raffle-card {
+            background: var(--surface-color);
+            border-radius: var(--card-radius);
+            padding: 50px;
+            text-align: center;
+            box-shadow: 0 8px 24px -8px rgba(74, 62, 61, 0.05);
+            border: 1px solid var(--border-ui);
+        }
+
+        .raffle-card h1 {
+            font-size: 2.3rem;
+            font-weight: 900;
+            color: #4a3e3d;
+            margin: 0 0 10px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .raffle-subtitle {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 35px;
+        }
+
+        .raffle-subtitle span { color: var(--pink-text); }
+
+        .rules-box {
+            border: 1px solid #e1d7d2;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: left;
+            margin-bottom: 30px;
+            background: transparent;
+        }
+
+        .rules-box p { font-size: 1.05rem; line-height: 1.7; color: var(--text-main); margin: 0 0 20px 0; }
+        .rules-box p:last-child { margin-bottom: 0; }
+        .highlight-gold { color: #b45309; font-weight: 700; }
+        .highlight-pink { color: var(--pink-text); font-weight: 700; }
+
+        .tags-row {
+            display: flex;
+            justify-content: flex-start;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 35px;
+        }
+
+        .info-tag {
+            background: var(--pink-accent);
+            color: var(--pink-text);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .action-row {
+            margin: 30px 0 35px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn-back {
+            background: var(--surface-color);
+            border: 1px solid var(--border-ui);
+            color: var(--text-muted);
+            padding: 14px 34px;
+            border-radius: 35px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 14px rgba(74, 62, 61, 0.04);
+            text-align: center;
+            display: inline-block;
+        }
+
+        .btn-back:hover {
+            transform: translateY(-2px);
+            color: var(--pink-text);
+            border-color: var(--pink-accent);
+            box-shadow: 0 6px 16px rgba(214, 104, 122, 0.1);
+        }
+
+        .disclaimer-text {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-style: italic;
+            text-align: left;
+            line-height: 1.4;
+            border-top: 1px solid var(--border-ui);
+            padding-top: 20px;
+        }
+
+        /* Dark Mode */
+        body.dark {
+            --bg-color: #1a1622;
+            --surface-color: #241d30;
+            --text-main: #ffffff;
+            --text-muted: #c9c1d6;
+            --pink-accent: #e7a6c8;
+            --pink-text: #ffdfec;
+            --border-ui: rgba(255,255,255,0.12);
+        }
+
+        body.dark .raffle-card { background: var(--surface-color); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35); }
+        body.dark .raffle-card h1 { color: #ffffff; }
+        body.dark .rules-box { border-color: rgba(255, 255, 255, 0.15); }
+        body.dark .info-tag { background: rgba(255, 255, 255, 0.08); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.12); }
+        body.dark .highlight-gold { color: #ffe3a3; }
+        body.dark .btn-back { color: #e9e3f5; border-color: rgba(255, 255, 255, 0.12); background: rgba(255, 255, 255, 0.04); }
+        body.dark .btn-back:hover { color: var(--pink-accent); border-color: var(--pink-accent); }
+
+        #petalsCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @media (max-width: 768px) {
+            .navbar { padding: 15px 20px; }
+            .theme-toggle { right: 20px; }
+            .raffle-container { margin: 20px auto 50px auto; }
+            .raffle-card { padding: 30px 20px; }
+            .raffle-card h1 { font-size: 1.7rem; }
+            .rules-box { padding: 20px; }
+            .tags-row { flex-direction: column; align-items: stretch; gap: 8px; }
+            .info-tag, .btn-back { text-align: center; width: 100%; box-sizing: border-box; padding: 14px 20px; }
+            .action-row { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="petalsCanvas"></canvas>
+    
+    <nav class="navbar">
+        <div class="nav-brand">Studio Mochi</div>
+        <button id="themeToggle" class="theme-toggle">🌙</button>
+    </nav>
+
+    <main class="raffle-container">
+        <div class="raffle-card">
+            <h1>GOLDEN TICKET PREORDER DRAW</h1>
+            <div class="raffle-subtitle">BUY NOW, <span>WIN</span> LATER.</div>
+
+            <div class="rules-box">
+                <p>Every <span class="highlight-gold">$5 spent</span> on preorders gets you <span class="highlight-gold">1 ticket</span> automatically entered into the draw. The winner will be selected randomly and posted here after preorders close.</p>
+                <p>PRIZE: The winner receives their order FREE<span class="highlight-pink">*</span></p>
+                <p>Everyone else gets a silver ticket for exclusive access to our secret menu on Market Day!</p>
+            </div>
+
+            <div class="tags-row">
+                <span class="info-tag">Transparent Draw</span>
+                <span class="info-tag">Secure Selection</span>
+                <span class="info-tag">Instant Prize</span>
+            </div>
+
+            <div class="action-row">
+                <a href="index.html" class="btn-back">Back to Menu</a>
+            </div>
+
+            <div class="disclaimer-text">
+                <span class="highlight-pink">*</span>Disclaimer: Free order prize applies to a maximum value of $10. Additional items over this limit are to be paid in full.
+            </div>
+        </div>
+    </main>
+
+<script>
+const toggle = document.getElementById("themeToggle");
+toggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    toggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+});
+
+const canvas = document.getElementById("petalsCanvas");
+const ctx = canvas.getContext("2d");
+function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resize();
+window.addEventListener("resize", resize);
+ 
+const PETAL_COUNT = window.innerWidth < 768 ? 15 : 40;
+const petals = [];
+for (let i = 0; i < PETAL_COUNT; i++) {
+    petals.push({
+        x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight * 0.8,
+        r: Math.random() * 7 + 8, speed: Math.random() * 0.6 + 0.3,
+        sway: Math.random() * 2, baseX: Math.random() * window.innerWidth
+    });
+}
+let fade = 1;
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let p of petals) {
+        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(Math.sin(p.sway + p.y * 0.01));
+        ctx.beginPath(); ctx.fillStyle = `rgba(255, 182, 193, ${0.35 * fade})`;
+        ctx.moveTo(0, 0); ctx.quadraticCurveTo(p.r, p.r, 0, p.r * 2); ctx.quadraticCurveTo(-p.r, p.r, 0, 0);
+        ctx.fill(); ctx.restore();
+        p.y += p.speed; p.x = p.baseX + Math.sin(p.sway + p.y * 0.015) * 18;
+        if (p.y > canvas.height) { p.y = -10; p.baseX = Math.random() * window.innerWidth; }
+    }
+    requestAnimationFrame(draw);
+}
+draw();
+</script>
+</body>
+</html>
