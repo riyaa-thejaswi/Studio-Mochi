@@ -191,7 +191,7 @@
             padding: 40px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             flex-grow: 1;
         }
 
@@ -359,9 +359,16 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            z-index: 10001;
+            z-index: 100000;
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
             font-weight: bold;
+            transition: background 0.4s ease, transform 0.4s ease, color 0.4s ease;
+        }
+
+        .close-btn:hover {
+            background: #f68787;
+            color: white;
+            transform: scale(1.05);  
         }
 
         .expanded-card .image-frame { height: 320px; width: 100%; overflow: hidden; flex-shrink: 0; }
@@ -376,7 +383,9 @@
             pointer-events: none; z-index: 10; filter: drop-shadow(0 0.1rem 0.15rem rgba(0,0,0,0.3));
         }
 
-        .expanded-card.open .image-frame::after { transform: rotate(-135deg); }
+        .expanded-card.open .image-frame::after {
+    display: none;
+}
         .image-frame:hover::after { transform: translateY(-0.25rem) rotate(45deg); }
         .expanded-card.open .image-frame:hover::after { transform: translateY(-0.25rem) rotate(-135deg); }
 
@@ -403,7 +412,7 @@
 
     <canvas id="petalsCanvas"></canvas>
     <nav class="navbar">
-        <div class="nav-brand">Studio Mochi</div>
+        <a class="nav-brand" href="index.html">Studio Mochi</a>
         <button id="themeToggle" class="theme-toggle">🌙</button>
     </nav>
 
@@ -416,7 +425,7 @@
         <div class="page-navigation">
             <a href="#" id="menuItemsBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="nav-link">Menu Items</a>
             <a href="preorderForm.html" class="nav-link">Preorder Form</a>
-            <a href="preorderRaffle.html" class="nav-link">Preorder RAFFLE</a>
+            <a href="preorderRaffle.html" class="nav-link">PREORDER RAFFLE</a>
         </div>
     </div>
 
@@ -477,11 +486,11 @@
                 <div class="meta-header">
                     <div>
                         <span class="category-tag">Signature Treat</span>
-                        <h2 class="product-title">Spirited Mochi</h2>
+                        <h2 class="product-title">Spirited<br>Mochi</h2>
                     </div>
                     <div class="product-price">$2.00</div>
                 </div>
-                <p class="product-description">Almost too cute to eat. Satisfyingly chewy mochis with a cloud-soft, fruity interior. Comes in three flavours: Mango, Matcha + Strawberry, Oreo</p>
+                <p class="product-description">Almost too cute to eat. Satisfyingly chewy mochis with a cloud-soft, fruity interior.</p>
             </div>
         </div>
 
@@ -492,8 +501,8 @@
             <div class="card-details">
                 <div class="meta-header">
                     <div>
-                        <span class="category-tag">Accessory</span>
-                        <h2 class="product-title">Customisable Keychain (PREORDER ONLY)</h2>
+                        <span class="category-tag">Preorder Only</span>
+                        <h2 class="product-title">Customisable Keychain</h2>
                     </div>
                     <div class="product-price">$3.00</div>
                 </div>
@@ -508,8 +517,8 @@
             <div class="card-details">
                 <div class="meta-header">
                     <div>
-                        <span class="category-tag">Accessory</span>
-                        <h2 class="product-title">Customisable Bracelet (PREORDER ONLY)</h2>
+                        <span class="category-tag">Preorder Only</span>
+                        <h2 class="product-title">Customisable Bracelet</h2>
                     </div>
                     <div class="product-price">$3.00</div>
                 </div>
@@ -614,13 +623,15 @@ function openCard(card) {
         { title: "Tomochi Cookies", desc: "Crunchy, cute cookies featuring a cloudlike mochi centre." },
         { title: "Spritey Mochi Brookies", desc: "Our famously irresistable brownie x cookie combo, now stuffed with soft and gooey mochi." },
         { title: "Jiji's Midnight Tiramisu", desc: "Perfect layers of espresso and sweet cream...all topped with the adorable Jiji cat." },
-        { title: "Spirited Mochi", desc: "Almost too cute to eat. Satisfyingly chewy mochis with a cloud-soft, fruity interior. Comes in three flavours: Mango, Matcha + Strawberry, Oreo" },
-        { title: "Customisable Keychains (PREORDER ONLY)", desc: "Cute handmade keychain for bags, keys, or gifts." },
+        { title: "Spirited Mochi", desc: `Almost too cute to eat. Satisfyingly chewy mochis with a cloud-soft, fruity interior. <p><strong style="font-size:1.15rem; color:#A15823;">Flavours</strong><br>🥭 Mango<br>
+    🍓 Strawberry Matcha<br>
+    🍪 Oreo</p>` },
+        { title: "Customisable Keychains", desc: `Cute handmade keychains for bags, keys, or gifts. <p><strong style="font-size:1.25rem; color:#d6687a;">Charms</strong><br>🥤 Soda<br>😸 Animal</p>` },
         { title: "Customisable Bracelet (PREORDER ONLY)", desc: "Premium bracelets in your choice of colours and charms." }
     ];
     const cards = Array.from(document.querySelectorAll(".product-card"));
     const index = cards.indexOf(card);
-    if (overrides[index]) { title.textContent = overrides[index].title; desc.textContent = overrides[index].desc; }
+    if (overrides[index]) { title.textContent = overrides[index].title; desc.innerHTML = overrides[index].desc; }
 
     clone.classList.add("expanded-card");
     clone.style.top = rect.top + "px"; clone.style.left = rect.left + "px";
