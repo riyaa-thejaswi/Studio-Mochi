@@ -560,7 +560,7 @@ function updateCountdown() {
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    countdownEl.innerHTML = ` Event in ${days}d ${hours}h ${minutes}m ${seconds}s`;
+    countdownEl.innerHTML = ` Only ${days}d ${hours}h ${minutes}m ${seconds}s left!`;
 }
 updateCountdown();
 setInterval(updateCountdown, 1000);
@@ -620,14 +620,30 @@ function openCard(card) {
     const title = clone.querySelector(".product-title");
     const desc = clone.querySelector(".product-description");
     const overrides = [
-        { title: "Tomochi Cookies", desc: "Crunchy, cute cookies featuring a cloudlike mochi centre." },
-        { title: "Spritey Mochi Brookies", desc: "Our famously irresistable brownie x cookie combo, now stuffed with soft and gooey mochi." },
-        { title: "Jiji's Midnight Tiramisu", desc: "Perfect layers of espresso and sweet cream...all topped with the adorable Jiji cat." },
-        { title: "Spirited Mochi", desc: `Almost too cute to eat. Satisfyingly chewy mochis with a cloud-soft, fruity interior. <p><strong style="font-size:1.15rem; color:#A15823;">Flavours</strong><br>🥭 Mango<br>
+        { title: "Tomochi Cookies", desc: `Crunchy, cute cookies featuring a cloudlike mochi centre.
+           <div style="display: flex; justify-content: center; width: 100%; margin-top: 25px;">
+           <svg width="120" height="120" viewBox="0 0 100 100">
+           <path d="M15 46 H5 M15 50 H3 M15 54 H6 M85 46 H95 M85 50 H97 M85 54 H94" stroke="#555" stroke-width="1.5" stroke-linecap="round"/>
+           <path d="M33 30 Q28 10 37 15 Q43 22 41 30 Z" fill="#7d878a" stroke="#444" stroke-width="1.5"/>
+           <path d="M67 30 Q72 10 63 15 Q57 22 59 30 Z" fill="#7d878a" stroke="#444" stroke-width="1.5"/>
+           <path d="M50 25 C25 25 18 45 18 65 C18 88 32 94 50 94 C68 94 82 88 82 65 C82 45 75 25 50 25 Z" fill="#7d878a" stroke="#444" stroke-width="1.5"/>
+           <ellipse cx="50" cy="67" rx="24" ry="21" fill="#fcfbe3" stroke="#444" stroke-width="1"/>
+           <path d="M42 55 Q50 51 58 55 Q50 58 42 55 M34 64 Q40 60 46 64 Q40 67 34 64 M54 64 Q60 60 66 64 Q60 67 54 64" fill="#7d878a"/>
+           <path d="M38 73 Q43 70 48 73 Q43 76 38 73 M52 73 Q57 70 62 73 Q57 76 52 73" fill="#7d878a"/>
+           <circle cx="34" cy="40" r="5.5" fill="#fff" stroke="#444" stroke-width="1"/>
+           <circle cx="34" cy="40" r="2" fill="#000"/>
+           <circle cx="66" cy="40" r="5.5" fill="#fff" stroke="#444" stroke-width="1"/>
+           <circle cx="66" cy="40" r="2" fill="#000"/>
+           <polygon points="47,42 53,42 50,45" fill="#444"/>
+         </svg>
+         </div>` },
+        { title: "Spritey Mochi Brookies", desc: `Our famously irresistable brownie x cookie combo, now stuffed with soft and gooey mochi. <p><strong style="font-size:1.25rem; color:var(--green-text);">Preorder Special</strong><br>Get a WHOLE brookie for only $12.00!</p>` },
+        { title: "Jiji's Midnight Tiramisu", desc: `Perfect layers of espresso and sweet cream...all topped with the adorable Jiji cat. <p><strong style="font-size:1.25rem; color:var(--purple-text);">Preorder Special - Choose Your Shape!</strong><br>😸 Jiji<br>🍃 Totoro<br>🔥 Calcifer</p>` },
+        { title: "Spirited Mochi", desc: `<strong style="font-size:1.15rem; color:var(--yellow-text);">Preorder Special</strong><br>Choose either the 3 pack customisable or 3 pack (one of each flavour) options for ONLY $5.00!<p><strong style="font-size:1.15rem; color:var(--yellow-text);">Flavours</strong><br>🥭 Mango<br>
     🍓 Strawberry Matcha<br>
     🍪 Oreo</p>` },
-        { title: "Customisable Keychains", desc: `Cute handmade keychains for bags, keys, or gifts. <p><strong style="font-size:1.25rem; color:#d6687a;">Charms</strong><br>🥤 Soda<br>😸 Animal</p>` },
-        { title: "Customisable Bracelet (PREORDER ONLY)", desc: "Premium bracelets in your choice of colours and charms." }
+        { title: "Customisable Keychain", desc: `Cute handmade keychains for bags, keys, or gifts. <p><strong style="font-size:1.25rem; color:var(--pink-text);">Charms</strong><br>🥤 Soda<br>😸 Animal</p>` },
+        { title: "Customisable Bracelet", desc: `Premium bracelets in your choice of colours and charms. <p><strong style="font-size:1.25rem; color:var(--green-text);">Charms</strong><br>✨ Star<br>🌙 Moon<br>💖 Heart</p>` }
     ];
     const cards = Array.from(document.querySelectorAll(".product-card"));
     const index = cards.indexOf(card);
