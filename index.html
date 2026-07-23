@@ -406,6 +406,28 @@
             .expanded-card .card-details { padding: 20px; }
             .expanded-card .product-title { font-size: 1.6rem; }
         }
+
+@keyframes raffleBounce {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+    25% {
+        transform: translateY(-6px) scale(1.04);
+    }
+    50% {
+        transform: translateY(0) scale(1);
+    }
+    75% {
+        transform: translateY(-3px) scale(1.02);
+    }
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.nav-link.attention {
+    animation: raffleBounce 0.8s ease;
+}
     </style>
 <link rel="icon" type="image/png" href="favicon.png">
 </head>
@@ -667,6 +689,14 @@ function openCard(card) {
     overlay.onclick = closeCard; activeCard = clone;
 }
 document.querySelectorAll(".product-card").forEach(card => { card.addEventListener("click", () => openCard(card)); });
+    
+window.addEventListener("load", () => {
+    const raffleBtn = document.querySelector('a[href="preorderRaffle.html"]');
+
+    setTimeout(() => {
+        raffleBtn.classList.add("attention");
+    }, 700);
+});
 </script>
 </body>
 </html>
