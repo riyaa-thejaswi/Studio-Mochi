@@ -7,11 +7,11 @@
     <title>Studio Mochi | Preorder Raffle</title>
     <style>
         :root {
-            --bg-color: #fbf7f4;          /* Soft Cream Milk-Tea */
-            --surface-color: #ffffff;     /* Clean White */
-            --text-main: #4a3e3d;         /* Rich Cocoa Brown */
-            --text-muted: #8a7a78;        /* Matte Taupe */
-            --pink-accent: #ffccd5;       /* Sakura Pink */
+            --bg-color: #fbf7f4;         
+            --surface-color: #ffffff;     
+            --text-main: #4a3e3d;        
+            --text-muted: #8a7a78;       
+            --pink-accent: #ffccd5;     
             --pink-text: #d6687a;
             --border-ui: #f1eae6;
             --card-radius: 20px;
@@ -52,6 +52,11 @@
             text-transform: uppercase;
             color: var(--pink-text);
             text-decoration: none;
+        }
+
+        .nav-brand:hover {
+            opacity: 0.8;
+            cursor: pointer;
         }
 
         .theme-toggle {
@@ -227,7 +232,7 @@
     <canvas id="petalsCanvas"></canvas>
     
     <nav class="navbar">
-        <div class="nav-brand">Studio Mochi</div>
+        <a class="nav-brand" href="index.html">Studio Mochi</a>
         <button id="themeToggle" class="theme-toggle">🌙</button>
     </nav>
 
